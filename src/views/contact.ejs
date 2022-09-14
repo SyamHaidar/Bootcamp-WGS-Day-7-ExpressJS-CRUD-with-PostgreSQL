@@ -1,0 +1,94 @@
+<div class="container mt-5 mb-4">
+  <!-- Heading -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Contact</h1>
+    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addContact">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" height="24" width="24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Input validator message -->
+  <% if (message.error.name || message.error.email || message.error.mobile) { %>
+    <div class="mb-2">
+      <div class="alert alert-danger d-flex justify-content-between align-items-start w-100">
+        <ul style="margin: 0">
+          <% if (message.error.name) { %> <li><%= message.error.name %></li> <% } %> 
+          <% if (message.error.email) { %> <li><%= message.error.email %></li> <% } %> 
+          <% if (message.error.mobile) { %> <li><%= message.error.mobile %></li> <% } %>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Save & update message -->
+  <% if (message.success.save || message.success.update) { %>
+    <div class="mb-2">
+      <div class="alert alert-success d-flex justify-content-between align-items-start w-100">
+        <ul style="margin: 0">
+          <% if (message.success.save) { %> <li><%= message.success.save %></li> <% } %> 
+          <% if (message.success.update) { %> <li><%= message.success.update %></li> <% } %> 
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Delete message -->
+  <% if (message.success.delete) { %>
+    <div class="mb-2">
+      <div class="alert alert-danger d-flex justify-content-between align-items-start w-100">
+        <ul style="margin: 0">
+          <li><%= message.success.delete %></li>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Contact list -->
+  <% if(!data.length) { %>
+    <p>Contact is empty</p>
+  <% } else { %>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.map((item,index)=>{ %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td class="pe-3"><%= item.name %></td>
+              <td class="pe-3"><%= item.email %></td>
+              <td class="pe-3"><%= item.mobile %></td>
+              <td class="d-flex justify-content-end">
+                <a href="/contact/<%= item.name %>/edit" class="btn btn-light text-primary btn-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="18" width="18">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                  </svg>                  
+                </a>
+                <a href="/contact/<%= item.name %>/delete"  class="btn btn-light text-danger btn-sm ms-2" onClick="return confirm('Are you sure you want to delete data?')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="18" width="18">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                  </svg>
+                </a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<!-- add contact modal -->
+<%- include('components/modalAdd') %>

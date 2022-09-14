@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="https://www.google.com/s2/favicons?domain_url=https://www.wgs.co.id" type="image/x-icon">
+    <!-- <title>BootcampWGS.com</title> -->
+    <title><%= title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="/public/css/bootstrap.css" />
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column" style="min-height: 100vh">
+    <nav class="navbar navbar-expand navbar-light bg-white border-bottom">
+      <div class="d-flex justify-content-between align-items-center container">
+        <div class="justify-content-start">
+          <a href="/" class="d-flex align-items-center">
+            <img src="/public/logo.svg" height="32" alt="WGS Logo">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link fw-semibold <%= (page === 'home') && 'active' %>" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold <%= (page === 'contact') && 'active' %>" href="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold <%= (page === 'about') && 'active' %>" href="/about">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div style="flex: auto">
+      <%- body %>
+    </div>
+
+    <footer class="my-4">
+      <p class="text-center text-muted m-0" style="font-size: 13px;">&copy; 2022 BootcampWGS.com</p>
+    </footer>
+    <script src="/public/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

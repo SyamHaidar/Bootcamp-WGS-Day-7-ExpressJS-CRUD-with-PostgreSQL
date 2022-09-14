@@ -1,0 +1,62 @@
+<div class="container mt-5 mb-4">
+  <div class="mb-4">
+    <h1>Contact Edit</h1>
+  </div>
+
+  <!-- Input validator message -->
+  <% if (message.error.name || message.error.email || message.error.mobile) { %>
+  <div class="mb-2">
+    <div class="alert alert-danger d-flex justify-content-between align-items-start w-100">
+      <ul style="margin: 0">
+        <% if (message.error.name) { %>
+        <li><%= message.error.name %></li>
+        <% } %> <% if (message.error.email) { %>
+        <li><%= message.error.email %></li>
+        <% } %> <% if (message.error.mobile) { %>
+        <li><%= message.error.mobile %></li>
+        <% } %>
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  <% } %>
+
+  <form action="/contact/update" method="post">
+    <div>
+      <input type="hidden" name="oldName" value="<%= data.name %>" />
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          value="<%= (editData.name) ? editData.name : data.name %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          value="<%= (editData.email) ? editData.email : data.email %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input
+          type="number"
+          name="mobile"
+          class="form-control"
+          value="<%= (editData.mobile) ? editData.mobile : data.mobile %>"
+          required
+        />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="/contact" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-primary ms-2">Update</button>
+    </div>
+  </form>
+</div>
